@@ -1,31 +1,142 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32929.385
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Avance 2", "Avance 2\Avance 2.vcxproj", "{6213FC9E-88B6-4463-9E01-03A24CDE1528}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Debug|x64.ActiveCfg = Debug|x64
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Debug|x64.Build.0 = Debug|x64
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Debug|x86.ActiveCfg = Debug|Win32
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Debug|x86.Build.0 = Debug|Win32
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Release|x64.ActiveCfg = Release|x64
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Release|x64.Build.0 = Release|x64
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Release|x86.ActiveCfg = Release|Win32
-		{6213FC9E-88B6-4463-9E01-03A24CDE1528}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {085E5500-E36E-4C82-9195-6DAE13FE9F29}
-	EndGlobalSection
-EndGlobal
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#include <string>
+#include <stdio.h>
+
+
+using namespace std;
+struct reseñas
+{
+	int numart, fecha,numoc;
+	string empresa, clasificacion, caracteristicas,nombre, descripcion, genero;
+	float total,subtotal,iva;
+
+};
+
+int main()
+{
+	reseñas juego[3];
+	int opcion, busqueda;
+
+	do
+	{
+		printf("\t ***MENU OPCIONES*** \n");
+		printf(" 1.-Agregar articulo \n 2.-Lista de articulos \n 3.-Eliminar articulo \n 4.-Limpiar pantalla \n 5.-Salir \n");
+		scanf("%d", &opcion);
+
+		switch (opcion)
+		{
+		case 1:
+			for (int i = 0; i < 3; i++)
+			{
+				juego[i].numart = 1 + i;
+				printf("Articulo numero: %d \n", juego[i].numart);
+				int salida = 1;
+				do
+				{
+					printf("ingrese el num oc \n");
+					scanf("%d", &juego[i].numoc);
+				} while (juego[i].numoc == juego[i - 1].numoc || juego[i].numoc == juego[i - 2].numoc);
+				printf("Que nombre tiene el articulo? \n");
+				cin.ignore();
+				getline(cin, juego[i].nombre);
+				printf("Fecha de salida \n");
+				scanf("%d", &juego[i].fecha);
+				printf("Clasificacion del articulo \n");
+				cin.ignore();
+				getline(cin, juego[i].clasificacion);
+				printf("Caracteristicas del articulo \n");
+				cin.ignore();
+				getline(cin, juego[i].caracteristicas);
+				printf("Detalles del articulo \n");
+				cin.ignore();
+				getline(cin, juego[i].descripcion);
+				printf("Genero del articulo \n");
+				cin.ignore();
+				getline(cin, juego[i].genero);
+				printf("ingrese el proveedor \n");
+				cin.ignore();
+				getline(cin, juego[i].empresa);
+				printf("ingrese el subtotal \n");
+				scanf("%f", &juego[i].subtotal);
+				juego[i].iva = juego[i].subtotal * .16;
+				juego[i].total = juego[i].subtotal + juego[i].iva;
+			}
+			break;
+
+		case 2:
+			int opc2;
+			printf("1.- num OC \n 2.-Listas Vigentes");
+			scanf("%d", &opc2);
+			if (opc2 == 1)
+			{
+				printf("ingrese el numero del articulo");
+				scanf("%d", &busqueda);
+				for (int i = 0; i < 3; i++)
+				{
+					if (busqueda == juego[i].numoc)
+					{
+						printf("Arituclo numero: %d \n", juego[i].numart);
+						printf("num OC: %d \n", juego[i].numoc);
+						printf("Nombre: %s \n", juego[i].nombre.c_str());
+						printf("Fecha: %d \n", juego[i].fecha);
+						printf("Clasificacion: %s \n", juego[i].clasificacion.c_str());
+						printf("Caracteristicas: %s \n", juego[i].caracteristicas.c_str());
+						printf("Detalles: %s \n", juego[i].descripcion.c_str());
+						printf("Genero: %s \n", juego[i].genero.c_str());
+						printf("Proveedor %s \n", juego[i].empresa.c_str());
+						printf("Subtotal: %f \n", juego[i].subtotal);
+						printf("Iva: %f \n", juego[i].iva);
+						printf("Total: %f \n", juego[i].total);
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					if (juego[i].numoc != 0)
+					{
+						printf("Articulo numero: %d \n", juego[i].numart);
+						printf("Num OC: %d \n", juego[i].numoc);
+						printf("Nombre: %s \n", juego[i].nombre.c_str());
+						printf("Fecha: %d \n", juego[i].fecha);
+						printf("Clasificacion: %s \n", juego[i].clasificacion.c_str());
+						printf("Caracteristicas: %s \n", juego[i].caracteristicas.c_str());
+						printf("Detalles: %s \n", juego[i].descripcion.c_str());
+						printf("Genero: %s \n", juego[i].genero.c_str());
+						printf("Proveedor %s \n", juego[i].empresa.c_str());
+						printf("Subtotal: %f \n", juego[i].subtotal);
+						printf("Iva: %f \n", juego[i].iva);
+						printf("Total: %f \n", juego[i].total);
+					}
+				}
+			}
+			break;
+
+		case 3:
+			printf("ingrese el num oc");
+			scanf("%d", &busqueda);
+			for (int i = 0; i < 3; i++)
+			{
+				if (busqueda == juego[i].numoc)
+				{
+					juego[i].numoc = 0;
+				}
+			}
+			break;
+
+		case 4:
+			system("cls");
+			break;
+		case 5:
+			printf("saliendo... \n");
+			break;
+		default:
+			printf("intente denuevo... \n");
+			break;
+		}
+	} while (opcion != 5);
+	system("pause");
+}
